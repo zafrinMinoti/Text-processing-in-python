@@ -3,6 +3,7 @@
 	and finds the largest word in the document.
 	it prints out the word in console.
 '''
+import string
 
 # Get Text and haldel possible errors
 while True:
@@ -33,6 +34,14 @@ while True:
 		break
 
 # preprocesses text
+# remove punctuation
+for punc in list(string.punctuation):
+    text = text.replace(punc+'\n', '')	# for words the continues to newline
+    text = text.replace(punc, ' ')		# to replace hypaned phreses and other puncuations
+# remove numbers
+for degit in list(string.digits):
+	text = text.replace(degit, '')
+# return a list of words in lowercase, punc-free
 words = text.lower().split()
 
 # get a dictionary of words with their lenghs
@@ -48,10 +57,9 @@ for word,length in words_size.items():
 words_sorted_by_size = sorted(words_sorted_by_size, reverse=True)
 
 # print the largest word
-print('The largest word is:', words_sorted_by_size[0][1])
+print('\nThe largest word is:', words_sorted_by_size[0][1])
 
 # ways to improve:
 # make loops more comprehensive?
-# Any exceptions reading file??
-# filter only for words... 
-	# no hypens, symbols, sequence of numbers, etc
+# improve handeling exceptions reading file??
+# what if text contains sequence of symbols (not punctuations)
