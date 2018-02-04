@@ -1,19 +1,33 @@
-# Get Text
-while True:
-	text = input('Enter a string or name of a text document:\n\t')
-	print('Be sure to include .txt extension of the file')
+'''
+	This program takes a string or a text file as input
+	and finds the largest word in the document.
+	it prints out the word in console.
+'''
 
+# Get Text and haldel possible errors
+while True:
+	text = input('Please enter a string or name/path of a text document:\n\t')
+
+	#ideal - .txt file in with the (.txt) extension
 	if text[-4:] == '.txt':
 		try:
 			text = open(text).read()
 			break
 		except:
 			print('Could not read the file.\nPlease check the destination of the file\nand try again.')
+	# in case user put non-text file
+	elif '.' in list(text):
+		print('That does not looks like a text file.')
+		continue
+	# In case user forgot the .txt extension
 	elif ' ' not in text:
 		try:
 			text = open(text+'.txt').read()
+			break
 		except:
 			print('Failed to open:', text+'.txt', '. Please try again\n')
+		continue
+	# if user input was a string
 	else:
 		text = str(text)
 		break
@@ -37,6 +51,7 @@ words_sorted_by_size = sorted(words_sorted_by_size, reverse=True)
 print('The largest word is:', words_sorted_by_size[0][1])
 
 # ways to improve:
-# add file handeling in systems
 # make loops more comprehensive?
 # Any exceptions reading file??
+# filter only for words... 
+	# no hypens, symbols, sequence of numbers, etc
